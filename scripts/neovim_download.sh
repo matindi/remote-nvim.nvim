@@ -77,27 +77,10 @@ function download_neovim() {
 		exit 1
 	fi
 
-	local checksum_path="$download_path".sha256sum
-	local expected_checksum=""
-	# This ensures that they do not match
-	local actual_checksum="$expected_checksum-actual"
-
-	if [ -e "$download_path" ] && [ -e "$checksum_path" ]; then
-		expected_checksum=$(cut -d ' ' -f 1 <"$checksum_path")
-		actual_checksum=$(sha256sum "$download_path" | cut -d ' ' -f 1)
-	fi
-
-	if [ "$actual_checksum" == "$expected_checksum" ]; then
-		echo "Existing installation with matching checksum found. Skipping downloading..."
-		return 0
-	fi
+	
 
 	echo "Downloading Neovim..."
 	download "$download_url" "$download_path"
-	if [[ $version != "nightly" ]]; then
-		# Nightly versions do not come with checksums
-		download "$download_url".sha256sum "$checksum_path"
-	fi
 	echo "Download completed."
 }
 
