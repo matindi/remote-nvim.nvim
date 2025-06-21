@@ -4,15 +4,15 @@
 set -eo pipefail
 
 # Check if either curl or wget is available on the system
-if command -v curl &>/dev/null; then
-	downloader="curl"
-elif command -v wget &>/dev/null; then
-	downloader="wget"
-else
-	echo "Error: This script requires either curl or wget to be installed."
-	exit 1
-fi
-
+# if command -v curl &>/dev/null; then
+# 	downloader="curl"
+# elif command -v wget &>/dev/null; then
+# 	downloader="wget"
+# else
+# 	echo "Error: This script requires either curl or wget to be installed."
+# 	exit 1
+# fi
+downloader="wget"
 function display_help() {
 	cat <<EOM
 Usage: $0 -v <nvim-version> -d <download-path> -o <os-name> -t <download-type>
